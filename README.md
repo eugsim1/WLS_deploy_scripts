@@ -18,7 +18,7 @@ Two docker images will simulate two weblogic servers.
 
 The source server deploys a simple 12.12213 clustered weblogic domain
 
-![](C:\projects\GitHub\WLS_deploy_scripts\images\source_cluster.jpg)
+![](../images/source_cluster.jpg)
 
 We will use the WDT tool to create an image of the wls configuration, then we will transfer this image to the target wls server.
 

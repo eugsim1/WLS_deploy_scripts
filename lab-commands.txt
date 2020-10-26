@@ -25,7 +25,7 @@ docker container ls -a
 ### the target server will run on 9001 for the console and 10001 for the admin server
 ###
 
-### start teh migration
+### start the migration
 ### log to the source server
 ssh -i ~/.ssh/priv.txt  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"  oracle@localhost -p $DOCKER_PORT_SOURCE
 ### 
@@ -39,6 +39,9 @@ nohup $DOMAIN_HOME/startWebLogic.sh &
 ### go to the scripts directory and execute the discovery of the domain
 ###
 cd WLS_deploy_scripts
+
+cat discover_domain.sh
+
 ./discover_domain.sh
 ###
 ### create a zip file with all the articats

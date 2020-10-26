@@ -1,4 +1,5 @@
 ---
+
 typora-copy-images-to: images
 ---
 
@@ -70,6 +71,25 @@ docker container ls -a
 ### start the migration
 ### log to the source server
 ssh -i ~/.ssh/priv.txt  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"  oracle@localhost -p $DOCKER_PORT_SOURCE
+```
+
+```
+### 
+### start the admin server => this is not manadatory
+###
+nohup $DOMAIN_HOME/startWebLogic.sh &
+```
+
+###
+### log in the console IP of the hosts:7001/console weblogic/welcome1
+###
+
+![](images/source-console.jpg)
+
+### go to the scripts directory and execute the discovery of the domain
+```
+###
+cd WLS_deploy_scripts
 ```
 
 

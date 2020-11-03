@@ -1,7 +1,9 @@
 ./clean.sh
+cp /home/oracle/.ssh/* keys/.
 docker image prune -f
 docker build \
       -t 12214-domain .
+	  
 ###
 ###
 #### docker run -d -P --name test_sshd_target 12214-domain:latest

@@ -4,7 +4,9 @@ docker image rmi 12213-domain-home-in-image-wdt -f
 ./build-archive.sh
 
 ssh-keygen -t rsa -f keys/wls_rsa -q -P ""
+cat keys/wls_rsa.pub >> authorized_keys
 cp -R keys /home/oracle/.ssh/.
+
 chmod go-rwx /home/oracle/.ssh
 
 

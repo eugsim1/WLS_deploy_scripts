@@ -157,7 +157,7 @@ RUN cd /home/oracle && \
 	chmod u+x /home/oracle/WLS_deploy_scripts/*.sh && \
 	rm -rf WLS_deploy_scripts/source-12213-domain && \
 	rm -rf WLS_deploy_scripts/target-12214-domain && \
-	rm -rf js images index.html manifest.json welcome_target.txt && \
+	rm -rf js && rm -rf images && rm -rf index.html && rm -rf manifest.json && rm -rf welcome_target.txt && rm -rf .gi* && rm -rf READ* && \
     if [ -n "$WDT_MODEL" ]; then MODEL_OPT="-model_file $PROPERTIES_FILE_DIR/${WDT_MODEL##*/}"; fi && \
     if [ -n "$WDT_ARCHIVE" ]; then ARCHIVE_OPT="-archive_file $PROPERTIES_FILE_DIR/${WDT_ARCHIVE##*/}"; fi && \
     if [ -n "$WDT_VARIABLE" ]; then VARIABLE_OPT="-variable_file $PROPERTIES_FILE_DIR/${WDT_VARIABLE##*/}"; fi && \ 

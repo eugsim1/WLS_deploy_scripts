@@ -1,12 +1,13 @@
 #!/bin/bash
 #### clean all previous configuration
 ####
-docker container rm test_sshd_target -f
-docker container rm test_sshd -f
+docker rm -f $(docker ps -a -q)
 docker network rm test
 ###
 ### build the images for the lab
 cd /home/oracle/stage/source-12213-domain
+./build-docker-image.sh
+cd /home/oracle/stage/target-12214-domain
 ./build-docker-image.sh
 ###
 ### create a network for the docker containers

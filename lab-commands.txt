@@ -14,13 +14,13 @@ cd /home/oracle/stage/target-12214-domain
 ###
 docker network create -d bridge test
 docker run -d -P --name test_sshd_target --network test -p 9001:7001 -p 10001:8001 12214-domain:latest
-export DOCKER_PORT_TARGET=`docker port test_sshd_target 22`
-export DOCKER_PORT_TARGET=`echo $DOCKER_PORT | sed 's/0.0.0.0://g'`
+export DOCKER_PORT_TARGET=`docker port test_sshd_target 22/tcp`
+export DOCKER_PORT_TARGET=`echo $DOCKER_PORT_TARGET | sed 's/0.0.0.0://g'`
 echo $DOCKER_PORT_TARGET
 ###
 ###
 docker run -d -P --name test_sshd --network test -p 7001:7001 -p 8001:8001 12213-domain-home-in-image-wdt:latest
-export DOCKER_PORT_SOURCE=`docker port test_sshd 22`
+export DOCKER_PORT_SOURCE=`docker port test_sshd 22/tcp`
 export DOCKER_PORT_SOURCE=`echo $DOCKER_PORT_SOURCE | sed 's/0.0.0.0://g'`
 echo $DOCKER_PORT_SOURCE
 docker container ls -a

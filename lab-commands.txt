@@ -7,7 +7,7 @@ docker network rm test
 docker container ls -a 
 
 cd
-mv WLS_deploy_scripts WLS_deploy_scripts-old
+rm -rf  WLS_deploy_scripts
 git clone https://github.com/eugsim1/WLS_deploy_scripts.git
 cd WLS_deploy_scripts
 

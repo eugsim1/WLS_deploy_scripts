@@ -137,7 +137,7 @@ cd $DOMAIN_HOME
 ### start the admin server on the new target, noticed now the new version of the weblogc werver on the console
 ###
 ###
-nohup $DOMAIN_HOME/startWebLogic.sh & nohup
+nohup $DOMAIN_HOME/startWebLogic.sh & 
 ###
 ### take your browser and go the IP_of _host_server:9001/console the docker container exposes the port of the wls admin
 ### server 7001 to 9001 this is done one the lauch of the container !

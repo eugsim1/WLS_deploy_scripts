@@ -90,7 +90,7 @@ nohup $DOMAIN_HOME/startWebLogic.sh &
 ### go to the scripts directory and execute the discovery of the domain
 ```
 ###
-cd WLS_deploy_scripts
+cd /home/oracle/WLS_deploy_scripts
 ```
 
 ![](images/WLS_scripts.jpg)

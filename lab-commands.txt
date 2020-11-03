@@ -1,13 +1,16 @@
 #!/bin/bash
 #### clean all previous configuration
 ####
+docker rm -f $(docker ps -a -q)
+docker image prune -f
+docker network rm test
+docker container ls -a 
+
 cd
 mv WLS_deploy_scripts WLS_deploy_scripts-old
 git clone https://github.com/eugsim1/WLS_deploy_scripts.git
 cd WLS_deploy_scripts
-docker rm -f $(docker ps -a -q)
-docker network rm test
-docker container ls -a 
+
 ###
 ### build the images for the lab
 cd /home/oracle/WLS_deploy_scripts
@@ -67,7 +70,7 @@ cat discover_domain.sh
 ###
 scp -i ~/.ssh/wls_rsa  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" \
 /home/oracle/WLS_deploy_scripts/discovery_files.zip \
-oracle@test_sshd_target:/home/oracle/WLS_deploy_scripts/discovery_files.zip
+oracle@test_sshd_target:/home/oracle/WLS_deploy_scripts/discovery_files.zip && clear
 clear
 ####
 ####

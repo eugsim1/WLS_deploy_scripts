@@ -5,4 +5,6 @@ updateDomain.sh \
 -variable_file update.properties \
 -archive_file update.zip \
 -admin_user weblogic \
--admin_url t3://localhost:7001
+-admin_url t3://localhost:7001<<EOF
+welcome1
+EOF

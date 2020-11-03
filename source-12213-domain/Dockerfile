@@ -136,7 +136,6 @@ ENV WDT_HOME=$WDT_HOME/weblogic-deploy
 COPY ${WDT_MODEL} ${WDT_ARCHIVE} ${WDT_VARIABLE} properties/docker-build/*.properties ${PROPERTIES_FILE_DIR}/
 # --chown for COPY is available in docker version 18 'COPY --chown oracle:root'
 RUN chown -R oracle:root ${PROPERTIES_FILE_DIR}
-COPY --chown oracle:root archive/ /home/oracle/WLS_deploy_scripts/
 COPY keys/* /home/oracle/.ssh/
 RUN  chown -R oracle:root /home/oracle/.ssh && \
      chmod go-rw /home/oracle/.ssh/*

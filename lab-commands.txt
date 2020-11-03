@@ -6,9 +6,11 @@ docker network rm test
 docker container ls -a 
 ###
 ### build the images for the lab
-cd /home/oracle/stage/source-12213-domain
+cd /home/oracle/WLS_deploy_scripts
+find  . -type f -iname "*.sh" -exec chmod +x {} \;
+cd /home/oracle/WLS_deploy_scripts/source-12213-domain
 ./build-docker-image.sh
-cd /home/oracle/stage/target-12214-domain
+cd /home/oracle/WLS_deploy_scripts/target-12214-domain
 ./build-docker-image.sh
 ###
 ### create a network for the docker containers

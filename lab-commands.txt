@@ -3,6 +3,7 @@
 ####
 docker rm -f $(docker ps -a -q)
 docker network rm test
+docker container ls -a 
 ###
 ### build the images for the lab
 cd /home/oracle/stage/source-12213-domain
@@ -32,7 +33,9 @@ docker container ls -a
 
 ### start the migration
 ### log to the source server
-ssh -i ~/.ssh/priv.txt  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"  oracle@localhost -p $DOCKER_PORT_SOURCE
+ssh -i ~/.ssh/priv.txt  \
+-o "UserKnownHostsFile=/dev/null" \
+-o "StrictHostKeyChecking=no"  oracle@localhost -p $DOCKER_PORT_SOURCE
 ### 
 ### start the admin server => this is not manadatory
 ###

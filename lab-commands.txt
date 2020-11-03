@@ -1,6 +1,10 @@
 #!/bin/bash
 #### clean all previous configuration
 ####
+cd
+mv WLS_deploy_scripts WLS_deploy_scripts-old
+git clone https://github.com/eugsim1/WLS_deploy_scripts.git
+cd WLS_deploy_scripts
 docker rm -f $(docker ps -a -q)
 docker network rm test
 docker container ls -a 
@@ -35,7 +39,8 @@ docker container ls -a
 
 ### start the migration
 ### log to the source server
-ssh -i ~/.ssh/wls_rsa  \
+cd /home/oracle/WLS_deploy_scripts/source-12213-domain
+ssh -i keys/wls_rsa  \
 -o "UserKnownHostsFile=/dev/null" \
 -o "StrictHostKeyChecking=no"  oracle@localhost -p $DOCKER_PORT_SOURCE
 ### 

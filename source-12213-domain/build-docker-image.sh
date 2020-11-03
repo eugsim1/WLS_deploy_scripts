@@ -12,3 +12,5 @@ docker build \
       --build-arg WDT_VARIABLE=properties/docker-build/domain.properties \
       --force-rm=true \
       -t 12213-domain-home-in-image-wdt .
+
+docker image prune -f	  

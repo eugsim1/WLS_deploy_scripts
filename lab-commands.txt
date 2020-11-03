@@ -5,6 +5,10 @@ docker container rm test_sshd_target -f
 docker container rm test_sshd -f
 docker network rm test
 ###
+### build the images for the lab
+cd /home/oracle/stage/source-12213-domain
+./build-docker-image.sh
+###
 ### create a network for the docker containers
 ###
 docker network create -d bridge test

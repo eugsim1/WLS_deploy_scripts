@@ -40,11 +40,35 @@ The script ***lab-comands.txt*** https://github.com/eugsim1/WLS_deploy_scripts/b
 
 ```
 #### clean all previous configuration
-docker container rm test_sshd_target -f
-docker container rm test_sshd -f
+docker rm -f $(docker ps -a -q)
+docker image prune -f
 docker network rm test
+docker container ls -a 
 
 ```
+Then clone the workshop repository scrips to build the 2 docker images as :
+```
+cd
+rm -rf  WLS_deploy_scripts
+git clone https://github.com/eugsim1/WLS_deploy_scripts.git
+cd WLS_deploy_scripts
+```
+The launch the below commands to build the dockerimages
+
+```
+###
+### build the images for the lab
+cd /home/oracle/WLS_deploy_scripts
+find  . -type f -iname "*.sh" -exec chmod +x {} \;
+cd /home/oracle/WLS_deploy_scripts/source-12213-domain
+./build-docker-image.sh
+cd /home/oracle/WLS_deploy_scripts/target-12214-domain
+./build-docker-image.sh
+```
+Then create the docker infrastructure for the workshop ie:
+Create a local network
+Create 2 container images source, and target
+
 
 ```
 ###
@@ -66,6 +90,7 @@ export DOCKER_PORT_SOURCE=`echo $DOCKER_PORT_SOURCE | sed 's/0.0.0.0://g'`
 echo $DOCKER_PORT_SOURCE
 docker container ls -a
 ```
+Get the ssh port of the source docker wich is running the wls source domain to migrate
 
 ```
 ### start the migration

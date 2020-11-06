@@ -3,7 +3,7 @@
 typora-copy-images-to: images
 ---
 
-# WLS\_deploy\_scripts for the WLS Workshop migration toolkit Part1
+# WLS\_deploy\_scripts for the WLS Workshop migration toolkit 
 
 The following scripts are using the [WDT Weblogic toolkit](https://github.com/oracle/weblogic-deploy-tooling/blob/master/samples/docker-domain/README.md)
 
@@ -291,9 +291,11 @@ updating: discovery_files/source.zip (stored 0%)
  ###
  ### copy the file to the target server
  ###
-$ scp -i ~/.ssh/priv.txt  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" \
- /home/oracle/WLS_deploy_scripts/discovery_files.zip \
- oracle@test_sshd_target:/home/oracle/WLS_deploy_scripts/discovery_files.zip
+scp -i ~/.ssh/wls_rsa  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" \
+/home/oracle/WLS_deploy_scripts/discovery_files.zip \
+oracle@test_sshd_target:/home/oracle/WLS_deploy_scripts/discovery_files.zip && clear
+clear
+
 
 Warning: Permanently added 'test_sshd_target,172.22.0.2' (ECDSA) to the list of known hosts.
 ###############################################################################

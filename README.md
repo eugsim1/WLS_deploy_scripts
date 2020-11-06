@@ -106,9 +106,12 @@ ssh -i ~/.ssh/priv.txt  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyCheck
 nohup $DOMAIN_HOME/startWebLogic.sh &
 ```
 
-###
-### log in the console IP of the hosts:7001/console weblogic/welcome1
-###
+
+log in the console IP of the hosts:7001/console
+
+with the following credentials weblogic/welcome1
+
+execute the commande  curl ifconfig.co to get your servers ip
 
 ![](images/source-console.jpg)
 

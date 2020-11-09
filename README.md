@@ -60,6 +60,7 @@ The launch the below commands to build the dockerimages
 ### build the images for the lab
 cd /home/oracle/WLS_deploy_scripts
 find  . -type f -iname "*.sh" -exec chmod +x {} \;
+###
 cd /home/oracle/WLS_deploy_scripts/source-12213-domain
 cp -R /home/oracle/stage/installers/keys .
 ./build-docker-image.sh

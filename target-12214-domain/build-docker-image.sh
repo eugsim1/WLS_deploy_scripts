@@ -1,7 +1,8 @@
 ./clean.sh
-rm -rf keys/*
-cp -R ../source-12213-domain/keys/* keys/
-ls -la keys/
+####rm -rf keys/*
+####cp -R ../source-12213-domain/keys/* keys/
+####ls -la keys/
+
 docker image prune -f
 docker build \
       -t 12214-domain .

@@ -51,6 +51,19 @@ Then clone the workshop repository scrips to build the 2 docker images as :
 cd
 rm -rf  WLS_deploy_scripts
 git clone https://github.com/eugsim1/WLS_deploy_scripts.git
+###
+### always restart docker daemon to avoid build failures 
+###
+sudo systemctl  restart docker
+sudo systemctl  status docker
+###
+### get the following images 
+###
+echo "Toula142312#" > ~/my_password.txt
+cat ~/my_password.txt | docker login --username eugsim1 --password-stdin
+docker pull store/oracle/weblogic:12.2.1.3 
+docker pull store/oracle/weblogic:12.2.1.4
+
 cd WLS_deploy_scripts
 ```
 The launch the below commands to build the dockerimages
@@ -65,6 +78,7 @@ cd /home/oracle/WLS_deploy_scripts/source-12213-domain
 cp -R /home/oracle/stage/installers/keys .
 ./build-docker-image.sh
 cd /home/oracle/WLS_deploy_scripts/target-12214-domain
+cp -R /home/oracle/stage/installers/keys .
 ./build-docker-image.sh
 ```
 Then create the docker infrastructure for the workshop ie:
@@ -82,7 +96,7 @@ docker network create -d bridge test
 ```
 docker run -d -P --name test_sshd_target --network test -p 9001:7001 -p 10001:8001 12214-domain:latest
 export DOCKER_PORT_TARGET=`docker port test_sshd_target 22`
-export DOCKER_PORT_TARGET=`echo $DOCKER_PORT | sed 's/0.0.0.0://g'`
+export DOCKER_PORT_TARGET=`echo $DOCKER_PORT_TARGET | sed 's/0.0.0.0://g'`
 echo $DOCKER_PORT_TARGET
 ###
 ###
@@ -97,7 +111,16 @@ Get the ssh port of the source docker wich is running the wls source domain to m
 ```
 ### start the migration
 ### log to the source server
-ssh -i ~/.ssh/priv.txt  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"  oracle@localhost -p $DOCKER_PORT_SOURCE
+cd /home/oracle/WLS_deploy_scripts/source-12213-domain
+ssh -i keys/wls_rsa  \
+-o "UserKnownHostsFile=/dev/null" \
+-o "StrictHostKeyChecking=no"  oracle@localhost -p $DOCKER_PORT_SOURCE
+
+####ssh -i keys/wls_rsa  \
+####-o "UserKnownHostsFile=/dev/null" \
+####-o "StrictHostKeyChecking=no"  oracle@localhost -p $DOCKER_PORT_TARGET
+
+
 ```
 ![](images/source.jpg)
 
@@ -162,7 +185,7 @@ fi
 ```
 
 ```
-[oracle@da3bd4d58d23 WLS_deploy_scripts]$ ./discover_domain.sh
+./discover_domain.sh
 rm: cannot remove ‘source.*’: No such file or directory
 clean startup
 Discovering the source domain...
@@ -220,7 +243,7 @@ discoverDomain.sh completed successfully (exit code = 0)
 The discovered WebLogic domain is composed from one admin and one clustered managed server, one application is deployed on the cluster
 
 ```
-[oracle@da3bd4d58d23 WLS_deploy_scripts]$ cat source.yaml
+ cat source.yaml
 domainInfo:
     AdminUserName: '@@PROP:AdminUserName@@'
     AdminPassword: '@@PROP:AdminPassword@@'
@@ -326,7 +349,9 @@ discovery_files.zip                                                             
 #### The next step is to log into the target server, and create a domain based on the captured configuration.
 #### From the source docker server log into the docker target server as oracle
 ```
-ssh -i ~/.ssh/priv.txt  -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" oracle@test_sshd_target
+ssh -i ~/.ssh/wls_rsa  \
+-o "UserKnownHostsFile=/dev/null" \
+-o "StrictHostKeyChecking=no" oracle@test_sshd_target
 
 Warning: Permanently added 'test_sshd_target,172.22.0.2' (ECDSA) to the list of known hosts.
 ###############################################################################
@@ -435,6 +460,9 @@ createDomain.sh \
 -model_file   discovery_files/source.yaml \
 -archive_file discovery_files/source.zip \
 -wlst_path    $WLST_PATH
+```
+change the mode of the  create_new_domain.sh
+```
 chmod u+x create_new_domain.sh
 ```
 
@@ -513,8 +541,10 @@ drwxr-x--- 3 oracle oracle 4096 Oct 26 15:17 init-info
 ```
 
 ```
-cat config.xml
+cat config/config.xml
+```
 
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <domain xsi:schemaLocation="http://xmlns.oracle.com/weblogic/security/wls http://xmlns.oracle.com/weblogic/security/wls/1.0/wls.xsd http://xmlns.oracle.com/weblogic/domain http://xmlns.oracle.com/weblogic/1.0/domain.xsd http://xmlns.oracle.com/weblogic/security http://xmlns.oracle.com/weblogic/1.0/security.xsd http://xmlns.oracle.com/weblogic/security/xacml http://xmlns.oracle.com/weblogic/security/xacml/1.0/xacml.xsd" xmlns="http://xmlns.oracle.com/weblogic/domain" xmlns:sec="http://xmlns.oracle.com/weblogic/security" xmlns:wls="http://xmlns.oracle.com/weblogic/security/wls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <name>wdt_domain</name>
@@ -625,12 +655,13 @@ cat config.xml
 </domain>
 
 ```
-
+Launch the new WebLogic Domain
 ```
 nohup $DOMAIN_HOME/startWebLogic.sh &
-[1] 1093
-nohup: ignoring input and appending output to ‘nohup.out’
+tail -f nohup.out
+```
 
+```
 tail -f nohup.out
 2020-10-26 15:24:51.434/10.430 Oracle Coherence 12.2.1.4.0 <Info> (thread=[STANDBY] ExecuteThread: '7' for queue: 'weblogic.kernel.Default (self-tuning)', member=n/a): Optional configuration override "/tangosol-coherence-override.xml" is not specified
 2020-10-26 15:24:51.443/10.438 Oracle Coherence 12.2.1.4.0 <Info> (thread=[STANDBY] ExecuteThread: '7' for queue: 'weblogic.kernel.Default (self-tuning)', member=n/a): Optional configuration override "cache-factory-config.xml" is not specified

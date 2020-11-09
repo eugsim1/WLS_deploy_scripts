@@ -5,13 +5,16 @@ typora-copy-images-to: images
 
 # WLS\_deploy\_scripts for the WLS Workshop migration toolkit 
 
-The following scripts are using the [WDT Weblogic toolkit](https://github.com/oracle/weblogic-deploy-tooling/blob/master/samples/docker-domain/README.md)
+The following scripts are using the [WDT Weblogic toolkit](https://github.com/oracle/weblogic-deploy-tooling)
 
 The workshop is based on a simple scenario:
 
 ![](images/Migration%20Architecture.png)
 
-Two docker images will simulate two weblogic servers.
+
+Two docker images will simulate two weblogic servers (source domain server, target domain server for this migration).
+
+
 
 > ```
 > CONTAINER IDIMAGE   COMMAND   CREATED STATUS  PORTS NAMES
@@ -23,7 +26,11 @@ Two docker images will simulate two weblogic servers.
 > 
 >
 
-The source server deploys a simple 12.12213 clustered weblogic domain
+
+
+The source server deploys a simple 12.2.1.3 clustered weblogic domain
+
+
 
 
 ![](images/source_cluster.jpg)
@@ -68,7 +75,7 @@ docker pull store/oracle/weblogic:12.2.1.4
 
 cd WLS_deploy_scripts
 ```
-The launch the below commands to build the dockerimages
+Then  launch the below commands to build the dockerimages
 
 ```
 ###

@@ -61,6 +61,7 @@ The launch the below commands to build the dockerimages
 cd /home/oracle/WLS_deploy_scripts
 find  . -type f -iname "*.sh" -exec chmod +x {} \;
 cd /home/oracle/WLS_deploy_scripts/source-12213-domain
+cp -R /home/oracle/stage/installers/keys .
 ./build-docker-image.sh
 cd /home/oracle/WLS_deploy_scripts/target-12214-domain
 ./build-docker-image.sh

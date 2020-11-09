@@ -9,6 +9,8 @@ The following scripts are using the [WDT Weblogic toolkit](https://github.com/or
 
 The workshop is based on a simple scenario:
 
+![](images/Migration%20Architecture.png)
+
 Two docker images will simulate two weblogic servers.
 
 > ```

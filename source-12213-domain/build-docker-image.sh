@@ -5,12 +5,12 @@ docker image rmi 12213-domain-home-in-image-wdt -f
 
 ###
 ###
-rm -rf keys/*
-cp /home/oracle/.ssh/authorized_keys keys/.
-ssh-keygen -t rsa -f keys/wls_rsa -q -P ""
-cd keys
-cp authorized_keys authorized_keys-bck
-cat wls_rsa.pub >> authorized_keys
+####rm -rf keys/*
+####cp /home/oracle/.ssh/authorized_keys keys/.
+####ssh-keygen -t rsa -f keys/wls_rsa -q -P ""
+####cd keys
+####cp authorized_keys authorized_keys-bck
+####cat wls_rsa.pub >> authorized_keys
 
 cd /home/oracle/WLS_deploy_scripts/source-12213-domain
 

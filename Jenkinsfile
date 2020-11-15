@@ -9,7 +9,7 @@ pipeline {
 
     stage('2nd') {
       steps {
-        sh 'pwd && whoami && ch /home/oracle && pwd '
+        sh 'pwd && whoami && cd /home/oracle && pwd '
       }
     }
 

@@ -13,5 +13,11 @@ pipeline {
       }
     }
 
+    stage('last') {
+      steps {
+        echo 'end'
+      }
+    }
+
   }
 }

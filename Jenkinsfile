@@ -3,7 +3,13 @@ pipeline {
   stages {
     stage('1st') {
       steps {
-        sh 'whoami sudo su - oracle whoami '
+        sh 'whoami '
+      }
+    }
+
+    stage('2nd') {
+      steps {
+        sh 'sudo su - oracle && whoami '
       }
     }
 

@@ -1,10 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('1st') {
       steps {
-        sh '''whoami
-pwd  /home/oracle'''
+        sh 'whoami sudo su - oracle whoami '
       }
     }
 

@@ -9,7 +9,7 @@ pipeline {
 
     stage('2nd') {
       steps {
-        sh 'sudo su - oracle && whoami '
+        sh 'pwd && whoami && ch /home/oracle && pwd '
       }
     }
 
